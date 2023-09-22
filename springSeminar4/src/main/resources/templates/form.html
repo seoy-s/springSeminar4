@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>글 작성 form</title>
+</head>
+<body>
+    <h1>Form📝</h1>
+    <h2>form.html</h2>
+    <div class="layout">
+        <form action="/write" method="post">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Title</label><br>
+                <input type="text" name="title" id="exampleFormControlInput1" placeholder="title">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput2" class="form-label">Name</label><br>
+                <input type="text" name="writer" id="exampleFormControlInput2" placeholder="writer">
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label><br>
+                <textarea id="exampleFormControlTextarea1" name="content" rows="5" placeholder="content"></textarea>
+            </div>
+            <button><a href="/main">작성 안 해~!!!</a></button>
+            <button type="submit">작성</button>
+        </form>
+    </div>
+</body>
+</html>

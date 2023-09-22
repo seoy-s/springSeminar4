@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>Detail(←글 제목)</title>
+</head>
+<body>
+    <h1>Detail📜</h1>
+    <h2>detail.html</h2>
+
+    <h1 th:text="${board.title}">제목입니다.</h1>
+    <h3 th:text="${board.writer}">작성자입니다.</h3>
+    <p th:text="${board.content}">내용입니다.</p>
+    <br><br>
+    <button><a href="/main">메인으로</a></button>
+</body>
+</html>

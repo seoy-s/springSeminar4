@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 메인~</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        th, tr, td{
+            border : solid black 1px;
+        }
+        .layout, h1, h2{
+            width : 500px;
+            margin : 0 auto;
+            margin-top : 40px;
+        }
+        button{
+            margin-left: 50%;
+        }
+    </style>
+</head>
+<body class="container">
+    <div class="layout">
+        <h1>Board👁‍🗨</h1>
+        <h2>board.html</h2>
+        <button><a href="/rest/main">PUSH!</a></button>
+        <button><a href="/form">새 글 쓰기!</a></button>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board : ${list}">
+            <td th:text="${board.id}">1</td>
+            <td>
+                <a th:text="${board.title}" th:href="@{/detail(id=${board.id})}">제목입니다.</a>
+            </td>
+            <td th:text="${board.writer}">작성자입니다.</td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <nav style="text-align: center;">-->
+<!--        &lt;!&ndash; 페이지네이션 &ndash;&gt;-->
+<!--        <ul class="pagination">-->
+
+<!--            &lt;!&ndash; First &ndash;&gt;-->
+<!--            <li>-->
+<!--                <a th:href="@{/main(nowPage=1)}" aria-label="First">-->
+<!--                    <span aria-hidden="true"> First </span>-->
+<!--                </a>-->
+<!--            </li>-->
+
+<!--            &lt;!&ndash; Previous(<) &ndash;&gt;-->
+<!--            <li th:class="${list.first} ? 'disabled'">-->
+<!--                <a th:href="${list.first} ? '#' :@{/main(page=${list.number - 1})}" aria-label="Previous">-->
+<!--                    <span aria-hidden="true"> &lt; </span>-->
+<!--                </a>-->
+<!--            </li>-->
+
+<!--            &lt;!&ndash; 현재 페이지 &ndash;&gt;-->
+<!--&lt;!&ndash;            <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:class="${page == nowPage} ? 'active'">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:text="${page}" th:href="@{/main(page=${page})}"></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+
+<!--            <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:class="${page == list.number - 1} ? 'active'">-->
+<!--                &lt;!&ndash; 현재 페이지 O : 링크 없음 &ndash;&gt;-->
+<!--                <span th:if="${page == nowPage}" th:text="${page}"></span>-->
+<!--                &lt;!&ndash; 현재 페이지 X : 링크 있음 &ndash;&gt;-->
+<!--                <span th:unless="${page == nowPage}">-->
+<!--                    <a th:href="@{/main(page=${page})}" th:text="${page}"></a>-->
+<!--                </span>-->
+<!--            </li>-->
+
+<!--            &lt;!&ndash; Next (>) &ndash;&gt;-->
+<!--            <li th:class="${list.last} ? 'disabled'">-->
+<!--                <a th:href="${list.last} ? '#' : @{/main(page=${list.number + 1})}" aria-label="Next">-->
+<!--                    <span aria-hidden="true"> &gt; </span>-->
+<!--                </a>-->
+<!--            </li>-->
+
+<!--            &lt;!&ndash; Last &ndash;&gt;-->
+<!--            <li>-->
+<!--                <a th:href="@{/main(page=${totalPage})}" aria-label="Last">-->
+<!--                    <span aria-hidden="true"> Last </span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+
+<!--        &lt;!&ndash; 첫번째 페이지로 이동 &ndash;&gt;-->
+<!--        <a th:href="@{/main(nowPage=1)}"> 첫 페이지 </a>-->
+
+<!--        &lt;!&ndash; 이전 링크 활성화 비활성화 &ndash;&gt;-->
+<!--        <a th:href="${list.first} ? '#' : @{/main(page=${list.number - 1})}"> 이전 </a>-->
+
+<!--        &lt;!&ndash; 페이지 번호 링크(현재 페이지는 숫자만) : for(int page = startPage; page <= endPage; page++) &ndash;&gt;-->
+<!--        <span th:each="page: ${#numbers.sequence(startPage, endPage)}" th:class="${page == list.number + 1} ? 'active'">-->
+
+<!--	    	&lt;!&ndash; 현재 페이지 O : 링크 없음, 색으로 강조 &ndash;&gt;-->
+<!--            <span th:if="${page == list.number + 1}" th:text="${page}" style="color : red"></span>-->
+<!--            &lt;!&ndash; 현재 페이지 X : 링크 있음 &ndash;&gt;-->
+<!--            <span th:unless="${page == list.number + 1}">-->
+<!--                <a th:href="@{/main(page=${page})}" th:text="${page}"></a>-->
+<!--            </span>-->
+
+<!--        </span>-->
+
+<!--        &lt;!&ndash; 다음 링크 활성화 비활성화 &ndash;&gt;-->
+<!--        <a th:href="${list.last} ? '#' : @{/main(page=${list.number + 1})}"> 다음 </a>-->
+
+<!--        &lt;!&ndash; 마지막 페이지로 이동 &ndash;&gt;-->
+<!--        <a th:href="@{/main(page=${totalPage})}"> 마지막 페이지 </a>-->
+
+
+        <!-- 첫번째 페이지로 이동 -->
+        <a th:href="@{/main(nowPage=1)}"> 첫 페이지 </a>
+
+        <!-- 이전 링크 활성화 비활성화 -->
+        <a th:href="${list.first} ? '#' : @{/main(page=${list.number - 1})}"> 이전 </a>
+
+        <!-- th:block : tag로 감쌀 필요 없는 부분을 th문법을 사용해 나타낼 때 사용 -->
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage}" th:href="@{/main(page = ${page-1})}" th:text="${page}"></a>
+            <strong  th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+            <!-- 현 페이지와 누르려는 페이지 같으면 href 작동 x -->
+        </th:block>
+
+        <!-- 다음 링크 활성화 비활성화 -->
+        <a th:href="${list.last} ? '#' : @{/main(page=${list.number + 1})}"> 다음 </a>
+
+        <!-- 마지막 페이지로 이동 -->
+        <a th:href="@{/main(page=${totalPage})}"> 마지막 페이지 </a>
+</body>
+</html>
